@@ -1,0 +1,10 @@
+[
+  {
+    "name": "predmet_vzorec",
+    "pattern": "(Izbriši|Odstrani|Zbriši) predmet (.+)"
+  },
+  {
+    "name": "izbrisi_predmet",
+    "pattern": "(\\bizbriši\\b|\\bzbriši\\b|\\bodstrani\\b|\\bbriši\\b)"
+  }
+]

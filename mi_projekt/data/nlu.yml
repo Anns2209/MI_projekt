@@ -1,0 +1,148 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: video_povezava
+  examples: |
+    - https://www.youtube.com/watch?v=dQw4w9WgXcQ
+    - https://vimeo.com/12345678
+    - https://video.domain.com/myvideo.mp4
+
+
+- intent: predmet_info
+  examples: |
+    - Kdo predava Mobilna interakcija?
+    - Kdaj imam Optične komunikacije?
+    - Koliko kreditov ima predmet Mobilna interakcija?
+
+- intent: shrani_video
+  examples: |
+    - Shrani ta video
+    - Dodaj povezavo v seznam
+    - Prosim shrani povezavo
+    - Ja shrani
+    - Shrani ga prosim
+
+- intent: analiziraj_video
+  examples: |
+    - Analiziraj video
+    - Povej mi več o videu
+    - Ja analiziraj
+    - Lahko izvedeš analizo?
+
+- intent: zahvala
+  examples: |
+    - hvala
+    - najlepša hvala
+    - najlepša ti hvala
+    - hvala lepa
+    - hvala ti
+    - ful hvala
+    - najlepša možna hvala
+    - zelo ti hvala
+
+
+- intent: prikazi_videe
+  examples: |
+    - Pokaži mi videe
+    - Katere videe sem že poslala?
+    - Kaj si zadnje shranila?
+    - Sto si zacuvala?
+    - Kaj sem shranila?
+    - Kaj sem ravno shranila?
+    - Kateri video sem nazadnje poslala?
+    - Kaj si shranila zame?
+    - Povezave, ki si jih shraniła
+    - Prosim prikaži vse shranjene videe
+
+
+
+
+
+
+
+
+
+
+    
+ 
+
+  
+
+
+    
+  
+

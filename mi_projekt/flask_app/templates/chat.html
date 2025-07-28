@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>RASA ChatBot</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #chat {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .user, .bot {
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 80%;
+            line-height: 1.5;
+            display: inline-block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .user {
+            background-color: #e0f0ff;
+            color: #004a99;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background-color: #d8f6d2;
+            color: #146614;
+        }
+
+        #userInput, #videoInput {
+            width: calc(100% - 120px);
+            max-width: 460px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 16px;
+            margin: 8px 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #005f9e;
+        }
+
+        label {
+            font-size: 14px;
+            margin-top: 20px;
+            display: inline-block;
+            color: #555;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>RASA ChatBot</h2>
+    <div id="chat"></div>
+
+    <input id="userInput" placeholder="Vpiši sporočilo..." />
+    <button onclick="sendMessage()">Pošlji</button>
+    <button onclick="startListening()">🎤 Govori</button>
+
+    <br><br>
+    <label for="videoInput">Prilepi video povezavo:</label>
+    <input type="text" id="videoInput" placeholder="https://..." />
+    <button onclick="sendVideo()">Pošlji video</button>
+
+    <script>
+        function addMessage(sender, text) {
+            const chat = document.getElementById('chat');
+            const message = document.createElement('div');
+            message.className = sender;
+            message.innerText = text;
+            chat.appendChild(message);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+            addMessage("user", message);
+            input.value = "";
+
+            const response = await fetch('/send_message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+            const data = await response.json();
+            addMessage("bot", data.reply);
+        }
+
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'sl-SI';
+        recognition.continuous = false;
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById('userInput').value = transcript;
+            sendMessage();
+        };
+
+        recognition.onerror = function(event) {
+            console.error("Napaka pri prepoznavanju govora:", event.error);
+            alert("Napaka pri govoru: " + event.error);
+        };
+
+        function startListening() {
+            recognition.start();
+        }
+
+        async function sendVideo() {
+            const videoUrl = document.getElementById('videoInput').value.trim();
+            if (!videoUrl) return;
+            addMessage("user", videoUrl);
+
+            const response = await fetch('/send_message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: videoUrl })
+            });
+            const data = await response.json();
+            addMessage("bot", data.reply);
+        }
+    </script>
+</body>
+</html>
+

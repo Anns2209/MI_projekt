@@ -1,0 +1,51 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say "Prosim" anythime the user says hvala
+  steps:
+    - intent: zahvala
+    - action: utter_prosim
+
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Informacije o predmetu
+  steps:
+  - intent: predmet_info
+  - action: action_vrni_informacije
+
+- rule: Video odgovor
+  steps:
+  - intent: video_povezava
+  - action: utter_video_potrjeno
+
+- rule: Shrani video
+  steps:
+  - intent: shrani_video
+  - action: action_shrani_video
+
+- rule: Analiziraj video
+  steps:
+  - intent: analiziraj_video
+  - action: action_analiziraj_video
+
+- rule: Default fallback
+  steps:
+  - intent: nlu_fallback
+  - action: utter_default
+
+
+
+
+
+
+
